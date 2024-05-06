@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240430052646_first_migration")]
-    partial class first_migration
+    [Migration("20240505085730_firstCreation")]
+    partial class firstCreation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,20 +20,40 @@ namespace DemoAPI.Migrations
                 .HasAnnotation("ProductVersion", "6.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("DemoAPI.Models.MarkModel", b =>
+                {
+                    b.Property<long>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("score")
+                        .HasColumnType("int");
+
+                    b.Property<int>("studentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("mark");
+                });
+
             modelBuilder.Entity("DemoAPI.Models.StudentModel", b =>
                 {
                     b.Property<long>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    b.Property<int>("address")
-                        .HasColumnType("int");
+                    b.Property<string>("address")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("contact_number")
-                        .HasColumnType("int");
+                    b.Property<string>("contact_number")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("email")
-                        .HasColumnType("int");
+                    b.Property<string>("email")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("first_name")
                         .IsRequired()

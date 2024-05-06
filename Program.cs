@@ -1,4 +1,5 @@
 using DemoAPI;
+using DemoAPI.Services.MarkService;
 using DemoAPI.Services.StudentService;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,9 +15,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
 });
 
 //register custom services
+builder.Services.AddScoped<IMarkService,MarkService>();
 builder.Services.AddScoped<IStudentService,StudentService>();
 
+
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

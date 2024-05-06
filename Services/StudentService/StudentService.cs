@@ -77,7 +77,7 @@ namespace DemoAPI.Services.StudentService
 
                 using (context)
                 {
-                    Console.WriteLine(context.Students);
+
                     // get all students fron database and add to student list after convert them to student dto
                     context.Students.ToList().ForEach(student => students.Add(new StudentDTO
                     {
@@ -139,7 +139,8 @@ namespace DemoAPI.Services.StudentService
                         student = null;
                     }
 
-                    if (student != null) {
+                    if (student != null)
+                    {
                         response = new BaseResponse
                         {
                             status_code = StatusCodes.Status200OK,
@@ -154,7 +155,8 @@ namespace DemoAPI.Services.StudentService
                             data = new { message = "No student found" }
                         };
                     }
-                    return response; }
+                    return response;
+                }
             }
             catch (Exception ex)
             {
@@ -220,52 +222,52 @@ namespace DemoAPI.Services.StudentService
             }
         }
 
-            public BaseResponse DeleteStudentById(long id)
+        public BaseResponse DeleteStudentById(long id)
+        {
+            BaseResponse response;
+
+            try
             {
-                BaseResponse response;
-
-                try
+                using (context)
                 {
-                    using (context)
+                    StudentModel studentToDelete = context.Students.Where(student => student.id == id).FirstOrDefault();
+
+                    if (studentToDelete != null)
+
                     {
-                        StudentModel studentToDelete = context.Students.Where(student => student.id == id).FirstOrDefault();
+                        context.Students.Remove(studentToDelete);
+                        context.SaveChanges();
 
-                        if (studentToDelete != null)
 
+                        response = new BaseResponse
                         {
-                            context.Students.Remove(studentToDelete);
-                            context.SaveChanges();
-
-
-                            response = new BaseResponse
-                            {
-                                status_code = StatusCodes.Status200OK,
-                                data = new { message = "Student deleted successfully" }
-                            };
-                        }
-                        else
-                        {
-                            response = new BaseResponse
-                            {
-                                status_code = StatusCodes.Status400BadRequest,
-                                data = new { message = "No student found" }
-                            };
-                        }
+                            status_code = StatusCodes.Status200OK,
+                            data = new { message = "Student deleted successfully" }
+                        };
                     }
-
-                    return response;
-                }
-                catch (Exception ex)
-                {
-                    response = new BaseResponse
+                    else
                     {
-                        status_code = StatusCodes.Status500InternalServerError,
-                        data = new { message = "Internal server error : " + ex.Message }
-                    };
+                        response = new BaseResponse
+                        {
+                            status_code = StatusCodes.Status400BadRequest,
+                            data = new { message = "No student found" }
+                        };
+                    }
                 }
+
                 return response;
             }
-        
+            catch (Exception ex)
+            {
+                response = new BaseResponse
+                {
+                    status_code = StatusCodes.Status500InternalServerError,
+                    data = new { message = "Internal server error : " + ex.Message }
+                };
+            }
+            return response;
+        }
+
     }
 }
 

@@ -6,6 +6,7 @@ namespace DemoAPI.Services.StudentService
     public interface IStudentService
     {
         BaseResponse CreateStudent(CreateStudentRequest request);
+        
 
         BaseResponse StudentList();
 

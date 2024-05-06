@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using DemoAPI.Models;
+using Microsoft.OpenApi.Any;
 
 namespace DemoAPI.DTOs
 {
@@ -21,5 +23,8 @@ namespace DemoAPI.DTOs
 
         [Required]
         public string contact_number { get; set; }
+
+        public int mark { get; set; }
+
     }
 }
