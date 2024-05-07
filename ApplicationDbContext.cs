@@ -19,6 +19,10 @@ namespace DemoAPI
         //add models to database context
         public virtual DbSet<StudentModel> Students { get; set; }
 
+
+        public virtual DbSet<SubjectModel> Subjects { get; set; }
+
+
         public virtual DbSet<MarkModel> Marks { get; set; }
 
     }

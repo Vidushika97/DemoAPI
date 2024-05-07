@@ -1,6 +1,7 @@
 using DemoAPI;
 using DemoAPI.Services.MarkService;
 using DemoAPI.Services.StudentService;
+using DemoAPI.Services.SubjectService;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
 });
 
 //register custom services
+builder.Services.AddScoped<ISubjectService,SubjectService>();
 builder.Services.AddScoped<IMarkService,MarkService>();
 builder.Services.AddScoped<IStudentService,StudentService>();
 

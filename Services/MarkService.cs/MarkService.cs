@@ -35,6 +35,7 @@ namespace DemoAPI.Services.MarkService
                 MarkModel newMark = new MarkModel();
                 newMark.score = request.score;
                 newMark.studentId = request.student;
+                newMark.subjectId = request.subjectId;
 
 
 
@@ -97,6 +98,7 @@ namespace DemoAPI.Services.MarkService
 
                     var joinedData = from student in context.Students
                                      join mark in context.Marks on student.id equals mark.studentId
+                                     join subject in context.Subjects on mark.subjectId equals subject.id
                                      select new StudentDTO
                                      {
                                          first_name = student.first_name,
@@ -104,7 +106,8 @@ namespace DemoAPI.Services.MarkService
                                          address = student.address,
                                          email = student.email,
                                          contact_number = student.contact_number,
-                                         mark = mark.score
+                                         mark = mark.score,
+                                         subject = subject.subject
                                      };
 
                     marks = joinedData.ToList();

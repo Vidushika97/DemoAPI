@@ -15,5 +15,8 @@ namespace DemoAPI.DTOs
         [Required]
         public int studentId { get; set;}
 
+         [Required]
+        public int subjectId { get; set;}
+
     }
 }

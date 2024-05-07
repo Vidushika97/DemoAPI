@@ -10,5 +10,9 @@ namespace DemoAPI.DTOs.Requests
 
         [Required]
         public int student { get; set; }
+
+
+        [Required]
+        public int subjectId { get; set; }
     }
 }

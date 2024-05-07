@@ -26,5 +26,8 @@ namespace DemoAPI.DTOs
 
         public int mark { get; set; }
 
+        public string subject { get; set; }
+
+
     }
 }

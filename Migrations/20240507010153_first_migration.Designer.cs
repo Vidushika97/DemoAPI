@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240505085730_firstCreation")]
-    partial class firstCreation
+    [Migration("20240507010153_first_migration")]
+    partial class first_migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,6 +30,9 @@ namespace DemoAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("studentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("subjectId")
                         .HasColumnType("int");
 
                     b.HasKey("id");
@@ -66,6 +69,21 @@ namespace DemoAPI.Migrations
                     b.HasKey("id");
 
                     b.ToTable("student");
+                });
+
+            modelBuilder.Entity("DemoAPI.Models.SubjectModel", b =>
+                {
+                    b.Property<long>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("subject")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("id");
+
+                    b.ToTable("subject");
                 });
 #pragma warning restore 612, 618
         }

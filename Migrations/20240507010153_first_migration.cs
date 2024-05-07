@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DemoAPI.Migrations
 {
-    public partial class firstCreation : Migration
+    public partial class first_migration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,7 +19,8 @@ namespace DemoAPI.Migrations
                     id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     score = table.Column<int>(type: "int", nullable: false),
-                    studentId = table.Column<int>(type: "int", nullable: false)
+                    studentId = table.Column<int>(type: "int", nullable: false),
+                    subjectId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -49,6 +50,21 @@ namespace DemoAPI.Migrations
                     table.PrimaryKey("PK_student", x => x.id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "subject",
+                columns: table => new
+                {
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    subject = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_subject", x => x.id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -58,6 +74,9 @@ namespace DemoAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "student");
+
+            migrationBuilder.DropTable(
+                name: "subject");
         }
     }
 }

@@ -30,6 +30,9 @@ namespace DemoAPI.Migrations
                     b.Property<int>("studentId")
                         .HasColumnType("int");
 
+                    b.Property<int>("subjectId")
+                        .HasColumnType("int");
+
                     b.HasKey("id");
 
                     b.ToTable("mark");
@@ -64,6 +67,21 @@ namespace DemoAPI.Migrations
                     b.HasKey("id");
 
                     b.ToTable("student");
+                });
+
+            modelBuilder.Entity("DemoAPI.Models.SubjectModel", b =>
+                {
+                    b.Property<long>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("subject")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("id");
+
+                    b.ToTable("subject");
                 });
 #pragma warning restore 612, 618
         }
